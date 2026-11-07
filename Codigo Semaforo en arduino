@@ -1,0 +1,49 @@
+// SEMAFORO ARDUINO UNO
+
+int rojo = 13;
+int amarillo = 12;
+int verde = 11;
+int buzzer = 10;
+
+void setup() {
+  pinMode(rojo, OUTPUT);
+  pinMode(amarillo, OUTPUT);
+  pinMode(verde, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop() {
+
+  // VERDE: 4 segundos
+  digitalWrite(verde, HIGH);
+  digitalWrite(amarillo, LOW);
+  digitalWrite(rojo, LOW);
+  noTone(buzzer);
+
+  delay(4000);
+
+  // AMARILLO: 3 parpadeos
+  digitalWrite(verde, LOW);
+
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(amarillo, HIGH);
+    tone(buzzer, 1000);
+    delay(200);
+
+    digitalWrite(amarillo, LOW);
+    noTone(buzzer);
+    delay(200);
+  }
+
+  // ROJO: 1 segundo con pitido
+  digitalWrite(rojo, HIGH);
+  tone(buzzer, 1000);
+  delay(1000);
+
+  noTone(buzzer);
+
+  // ESPERA: 3 segundos
+  delay(3000);
+
+  digitalWrite(rojo, LOW);
+}
